@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Collections.Generic;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -29,9 +30,9 @@ namespace Gaelio_devel
             InitializeComponent();
         }
 
-
+        #region Global Methods
         // 4.2 Create a method called “LoadData” which will populate both LinkedLists. The return type is void.
-        void LoadData()
+        public void LoadData()
         {
             linkedListA.Clear();
             linkedListB.Clear();
@@ -50,7 +51,7 @@ namespace Gaelio_devel
                 linkedListB.AddLast(readData.SensorB(sigma, mu));
             }
         }
-        void ShowAllSensorData()
+        public void ShowAllSensorData()
         {
 
             LinkedListView.Items.Clear();
@@ -64,12 +65,14 @@ namespace Gaelio_devel
             }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        public void Button_Click(object sender, RoutedEventArgs e)
         {
             LoadData();
             ShowAllSensorData();
             TextBoxTest.Text = NumberOfNodes(linkedListA).ToString();
         }
+        #endregion
+        #region Utility Methods
 
         // 4.5 Create a method called “NumberOfNodes”
         // that will return an integer which is the number of nodes(elements) in a LinkedList.
@@ -77,5 +80,89 @@ namespace Gaelio_devel
         {
             return listSize.Count();
         }
+
+
+        // 4.6 Create a method called "DisplayListboxData" that will display
+        // the content of a linkedlist inside the appropriate listbox.
+        private void DisplayListboxData(LinkedList<double> linkedList, ListBox listboxName)
+        {
+            listboxName.Items.Clear();
+            for (int i = 0; i < linkedList.Count(); i++)
+            {
+                listboxName.Items.Add(new
+                {
+                    GetSensorData = linkedList.ElementAt(i)
+                });
+            }
+
+            // TODO implement the click event for displaying data
+        }
+        #endregion
+        #region Sort and Search Methods
+
+        private bool SelectionSort(LinkedList<double> linkedlist)
+        {
+            int min = 0;
+            int max = linkedlist.Count();
+            bool flag = false;
+
+            for (int i = 0; i < max; i++)
+            {
+                min = i;
+                for (int j = i + 1; j > max; j++)
+                {
+                    if (linkedlist.ElementAt(i) < linkedlist.ElementAt(min))
+                    {
+                        min = j;
+                    }
+                }
+                LinkedListNode<double> currentMin = linkedlist.Find(linkedlist.ElementAt(min));
+                LinkedListNode<double> currentI = linkedlist.Find(linkedlist.ElementAt(i));
+                
+                double temp = currentMin.Value;
+                currentMin.Value = currentI.Value;
+                currentI.Value = temp;
+            }
+            // unsure about bool return
+            return true;
+        }
+
+
+        // 4.7 Create a method called SelectionSort which has a single input parameter of type LinkedList,
+        // while the calling code argument is linkedlist name. The method code must follow the pseudo code supplied 
+        // return type is boolean
+        /*
+         integer min => 0
+        integer max => numberOfNodes(list)
+        for ( i = 0 to max - 1 )
+        min => i
+        for ( j = i + 1 to max )
+        if (list element(j) < list element(min))
+        min => j
+        END for
+        // Supplied C# code
+        LinkedListNode<double> currentMin = list.Find(list.ElementAt(min))
+        LinkedListNode<double> currentI = list.Find(list.ElementAt(i))
+        // End of supplied C# code
+        var temp = currentMin.Value
+        currentMin.Value = currentI.Value
+        currentI.Value = temp
+        END for
+        */
+
+
+
+
+
+
+
+
+
+
+
+
+        #endregion
+
+
     }
 }
