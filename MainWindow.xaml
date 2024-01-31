@@ -4,45 +4,56 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Gaelio_devel"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <ListView x:Name="LinkedListView" Margin="0,0,483,0">
+        xmlns:cntrl="clr-namespace:NumericUpDownLib;assembly=NumericUpDownLib"
+        Title="MainWindow" Height="504" Width="832" ResizeMode="NoResize">
+
+    <Grid Margin="0,0,0,-6">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="131*"/>
+            <ColumnDefinition Width="676*"/>
+            <ColumnDefinition Width="0*"/>
+        </Grid.ColumnDefinitions>
+        <ListView x:Name="LinkedListView" Margin="11,10,0,0" HorizontalAlignment="Left" Width="240" Grid.ColumnSpan="2" Height="366" VerticalAlignment="Top">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn  DisplayMemberBinding="{Binding GetSensorA}" Header="Sensor A" Width="150"/>
-                    <GridViewColumn  DisplayMemberBinding="{Binding GetSensorB}" Header="Sensor B" Width="150"/>
-
+                    <GridViewColumn  DisplayMemberBinding="{Binding GetSensorA}" Header="Sensor A" Width="100"/>
+                    <GridViewColumn  DisplayMemberBinding="{Binding GetSensorB}" Header="Sensor B" Width="100"/>
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="384,55,0,0" VerticalAlignment="Top" Click="Button_Click"/>
-        <TextBox x:Name="TextBoxTest" HorizontalAlignment="Left" Margin="404,245,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="TextBoxTest" HorizontalAlignment="Left" Margin="259,300,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" Height="18" Grid.Column="1"/>
+        <ListBox x:Name="ListboxA" Margin="554,22,27,102" Grid.Column="1">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="{Binding GetSensorData}" />
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <ListBox x:Name="ListboxB" Margin="438,22,141,102" Grid.Column="1">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="{Binding GetSensorData}" />
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <Grid Margin="11,376,581,0" RenderTransformOrigin="0.503,1.019" Grid.ColumnSpan="2">
+            <cntrl:NumericUpDown x:Name="ServiceTag" Margin="42,10,138,0" DisplayLength="5" IsDisplayLengthFixed="True" IsMouseDragEnabled="False" IsReadOnly="True" MinValue="100" MaxValue="900" StepSize="10" RenderTransformOrigin="0.897,0.501" Height="32" VerticalAlignment="Top"/>
+            <cntrl:NumericUpDown x:Name="ServiceTag_Copy" Margin="180,10,0,0" DisplayLength="5" IsDisplayLengthFixed="True" IsMouseDragEnabled="False" IsReadOnly="True" MinValue="100" MaxValue="900" StepSize="10" RenderTransformOrigin="0.931,0.611" Height="32" VerticalAlignment="Top"/>
+            <Label x:Name="SigmaLabel" Content="Sigma" Margin="0,9,146,0" Height="32" VerticalAlignment="Top"/>
+            <Label x:Name="MuLabel" Content="Mu" Margin="149,9,44,0" RenderTransformOrigin="0.116,1.431" Height="32" VerticalAlignment="Top"/>
+            <Button x:Name="LoadButton" Content="Load Sensor Data" Margin="9,46,9,0" Click="LoadButton_Click" RenderTransformOrigin="0.555,1.09" Height="28" VerticalAlignment="Top"/>
+        </Grid>
 
-        <ListBox x:Name="ListboxA" Margin="487,10,155,0">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="100"/>
-                        </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="0" Text="{Binding GetSensorData}" />
-                    </Grid>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
-        <ListBox x:Name="ListboxB" Margin="660,10,10,0">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="100"/>
-                        </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="0" Text="{Binding GetSensorData}" />
-                    </Grid>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
 
 
 

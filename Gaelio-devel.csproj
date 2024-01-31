@@ -10,6 +10,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Dirkster.NumericUpDownLibEx" Version="3.4.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Reference Include="Galileo6">
       <HintPath>Galileo6.dll</HintPath>
     </Reference>

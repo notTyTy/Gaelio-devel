@@ -65,7 +65,7 @@ namespace Gaelio_devel
             }
         }
 
-        public void Button_Click(object sender, RoutedEventArgs e)
+        private void LoadButton_Click(object sender, RoutedEventArgs e)
         {
             LoadData();
             ShowAllSensorData();
@@ -100,11 +100,13 @@ namespace Gaelio_devel
         #endregion
         #region Sort and Search Methods
 
+        // 4.7 Create a method called SelectionSort which has a single input parameter of type LinkedList,
+        // while the calling code argument is linkedlist name. The method code must follow the pseudo code supplied 
+        // return type is boolean
         private bool SelectionSort(LinkedList<double> linkedlist)
         {
             int min = 0;
             int max = linkedlist.Count();
-            bool flag = false;
 
             for (int i = 0; i < max; i++)
             {
@@ -123,32 +125,11 @@ namespace Gaelio_devel
                 currentMin.Value = currentI.Value;
                 currentI.Value = temp;
             }
-            // unsure about bool return
+            // TODO unsure about bool return
             return true;
         }
 
 
-        // 4.7 Create a method called SelectionSort which has a single input parameter of type LinkedList,
-        // while the calling code argument is linkedlist name. The method code must follow the pseudo code supplied 
-        // return type is boolean
-        /*
-         integer min => 0
-        integer max => numberOfNodes(list)
-        for ( i = 0 to max - 1 )
-        min => i
-        for ( j = i + 1 to max )
-        if (list element(j) < list element(min))
-        min => j
-        END for
-        // Supplied C# code
-        LinkedListNode<double> currentMin = list.Find(list.ElementAt(min))
-        LinkedListNode<double> currentI = list.Find(list.ElementAt(i))
-        // End of supplied C# code
-        var temp = currentMin.Value
-        currentMin.Value = currentI.Value
-        currentI.Value = temp
-        END for
-        */
 
 
 
@@ -160,6 +141,23 @@ namespace Gaelio_devel
 
 
 
+
+
+
+
+
+
+        #region UI Button Methods
+        // 4.11 Create button click methods that will search the linked list for an integer value entered into a textbox on the form.
+
+        // 4.11 Method for sensor A/B and binary search iterative 
+
+
+
+        // TODO make a single method for both
+        // 4.11 Method for sensor A/B and binary search recursive
+
+        #endregion
 
         #endregion
 
