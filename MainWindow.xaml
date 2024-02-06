@@ -48,8 +48,8 @@
             </ListBox.ItemTemplate>
         </ListBox>
         <Grid Margin="11,376,202,0" RenderTransformOrigin="0.503,1.019" Grid.ColumnSpan="2">
-            <cntrl:NumericUpDown x:Name="SigmaUpDown" Margin="42,10,138,0" DisplayLength="5" IsDisplayLengthFixed="True" IsMouseDragEnabled="False" IsReadOnly="True" MinValue="100" MaxValue="900" StepSize="10" RenderTransformOrigin="0.897,0.501" Height="32" VerticalAlignment="Top"/>
-            <cntrl:NumericUpDown x:Name="MuUpDown" Margin="180,10,0,0" DisplayLength="5" IsDisplayLengthFixed="True" IsMouseDragEnabled="False" IsReadOnly="True" MinValue="100" MaxValue="900" StepSize="10" RenderTransformOrigin="0.931,0.611" Height="32" VerticalAlignment="Top"/>
+            <cntrl:NumericUpDown x:Name="SigmaUpDown" Margin="42,10,138,0" DisplayLength="5" IsDisplayLengthFixed="True" IsMouseDragEnabled="False" IsReadOnly="True" MinValue="10" MaxValue="20" StepSize="1" RenderTransformOrigin="0.897,0.501" Height="32" VerticalAlignment="Top"/>
+            <cntrl:NumericUpDown x:Name="MuUpDown" Margin="180,10,0,0" DisplayLength="5" IsDisplayLengthFixed="True" IsMouseDragEnabled="False" IsReadOnly="True" Value="50" MinValue="35" MaxValue="75" StepSize="1" RenderTransformOrigin="0.931,0.611" Height="32" VerticalAlignment="Top"/>
             <Label x:Name="SigmaLabel" Content="Sigma" Margin="0,9,146,0" Height="32" VerticalAlignment="Top"/>
             <Label x:Name="MuLabel" Content="Mu" Margin="149,9,44,0" RenderTransformOrigin="0.116,1.431" Height="32" VerticalAlignment="Top"/>
             <Button x:Name="LoadButton" Content="Load Sensor Data" Margin="9,46,9,0" Click="LoadButton_Click" RenderTransformOrigin="0.555,1.09" Height="28" VerticalAlignment="Top"/>
