@@ -9,8 +9,9 @@
 
     <Grid Margin="0,0,0,-6">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="131*"/>
-            <ColumnDefinition Width="676*"/>
+            <ColumnDefinition Width="135*"/>
+            <ColumnDefinition Width="318*"/>
+            <ColumnDefinition Width="379*"/>
             <ColumnDefinition Width="0*"/>
         </Grid.ColumnDefinitions>
         <ListView x:Name="LinkedListView" Margin="11,10,0,0" HorizontalAlignment="Left" Width="240" Grid.ColumnSpan="2" Height="366" VerticalAlignment="Top">
@@ -21,8 +22,8 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <TextBox x:Name="TextBoxTest" HorizontalAlignment="Left" Margin="259,300,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" Height="18" Grid.Column="1"/>
-        <ListBox x:Name="ListboxA" Margin="554,22,27,102" Grid.Column="1">
+        <TextBox x:Name="TextBoxTest" HorizontalAlignment="Left" Margin="63,417,0,0" TextWrapping="Wrap" Text="For data size" VerticalAlignment="Top" Width="120" Height="18" Grid.Column="2"/>
+        <ListBox x:Name="ListboxA" Margin="280,32,0,0" Grid.Column="1" Height="344" VerticalAlignment="Top" Grid.ColumnSpan="2" HorizontalAlignment="Left" Width="120" ScrollViewer.HorizontalScrollBarVisibility="Hidden">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid>
@@ -34,7 +35,7 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <ListBox x:Name="ListboxB" Margin="438,22,141,102" Grid.Column="1">
+        <ListBox x:Name="ListboxB" Margin="223,32,0,0" Grid.Column="2" Width="120" Height="344" HorizontalAlignment="Left" VerticalAlignment="Top" ScrollViewer.HorizontalScrollBarVisibility="Hidden">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid>
@@ -46,13 +47,15 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <Grid Margin="11,376,581,0" RenderTransformOrigin="0.503,1.019" Grid.ColumnSpan="2">
-            <cntrl:NumericUpDown x:Name="ServiceTag" Margin="42,10,138,0" DisplayLength="5" IsDisplayLengthFixed="True" IsMouseDragEnabled="False" IsReadOnly="True" MinValue="100" MaxValue="900" StepSize="10" RenderTransformOrigin="0.897,0.501" Height="32" VerticalAlignment="Top"/>
-            <cntrl:NumericUpDown x:Name="ServiceTag_Copy" Margin="180,10,0,0" DisplayLength="5" IsDisplayLengthFixed="True" IsMouseDragEnabled="False" IsReadOnly="True" MinValue="100" MaxValue="900" StepSize="10" RenderTransformOrigin="0.931,0.611" Height="32" VerticalAlignment="Top"/>
+        <Grid Margin="11,376,202,0" RenderTransformOrigin="0.503,1.019" Grid.ColumnSpan="2">
+            <cntrl:NumericUpDown x:Name="SigmaUpDown" Margin="42,10,138,0" DisplayLength="5" IsDisplayLengthFixed="True" IsMouseDragEnabled="False" IsReadOnly="True" MinValue="100" MaxValue="900" StepSize="10" RenderTransformOrigin="0.897,0.501" Height="32" VerticalAlignment="Top"/>
+            <cntrl:NumericUpDown x:Name="MuUpDown" Margin="180,10,0,0" DisplayLength="5" IsDisplayLengthFixed="True" IsMouseDragEnabled="False" IsReadOnly="True" MinValue="100" MaxValue="900" StepSize="10" RenderTransformOrigin="0.931,0.611" Height="32" VerticalAlignment="Top"/>
             <Label x:Name="SigmaLabel" Content="Sigma" Margin="0,9,146,0" Height="32" VerticalAlignment="Top"/>
             <Label x:Name="MuLabel" Content="Mu" Margin="149,9,44,0" RenderTransformOrigin="0.116,1.431" Height="32" VerticalAlignment="Top"/>
             <Button x:Name="LoadButton" Content="Load Sensor Data" Margin="9,46,9,0" Click="LoadButton_Click" RenderTransformOrigin="0.555,1.09" Height="28" VerticalAlignment="Top"/>
         </Grid>
+        <Label x:Name="labelListboxA" Grid.Column="1" Content="Sensor A" Margin="308,5,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" FontWeight="Bold" HorizontalAlignment="Left" Width="64"/>
+        <Label x:Name="labelListboxB" Grid.Column="2" Content="Sensor B" HorizontalAlignment="Left" Margin="251,5,0,0" VerticalAlignment="Top" Width="64" FontWeight="Bold"/>
 
 
 

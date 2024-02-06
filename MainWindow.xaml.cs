@@ -12,9 +12,6 @@ using System.Windows.Shapes;
 using Galileo6;
 
 // 4.1 Create two data structures using the LinkedList<T>. Must be type double
-
-
-
 namespace Gaelio_devel
 {
     /// <summary>
@@ -39,8 +36,8 @@ namespace Gaelio_devel
 
 
             // TODO these are placeholders
-            double sigma = 10;
-            double mu = 5;
+            double sigma = SigmaUpDown.Value;
+            double mu = MuUpDown.Value;
             ReadData readData = new();
 
             // 4.2 Create the appropriate loop construct to populate the two LinkedList
@@ -70,6 +67,11 @@ namespace Gaelio_devel
             LoadData();
             ShowAllSensorData();
             TextBoxTest.Text = NumberOfNodes(linkedListA).ToString();
+            SelectionSort(linkedListA); //TODO move this to dedicated button
+            SelectionSort(linkedListB);
+            DisplayListboxData(linkedListA, ListboxA);
+            DisplayListboxData(linkedListB, ListboxB);
+
         }
         #endregion
         #region Utility Methods
@@ -87,6 +89,8 @@ namespace Gaelio_devel
         private void DisplayListboxData(LinkedList<double> linkedList, ListBox listboxName)
         {
             listboxName.Items.Clear();
+            LinkedList<double> linkedListSorted = new();
+
             for (int i = 0; i < linkedList.Count(); i++)
             {
                 listboxName.Items.Add(new
@@ -105,15 +109,15 @@ namespace Gaelio_devel
         // return type is boolean
         private bool SelectionSort(LinkedList<double> linkedlist)
         {
-            int min = 0;
+            int min;
             int max = linkedlist.Count();
 
             for (int i = 0; i < max; i++)
             {
                 min = i;
-                for (int j = i + 1; j > max; j++)
+                for (int j = i + 1; j < max; j++)
                 {
-                    if (linkedlist.ElementAt(i) < linkedlist.ElementAt(min))
+                    if (linkedlist.ElementAt(j) < linkedlist.ElementAt(min))
                     {
                         min = j;
                     }
@@ -124,28 +128,11 @@ namespace Gaelio_devel
                 double temp = currentMin.Value;
                 currentMin.Value = currentI.Value;
                 currentI.Value = temp;
+
             }
             // TODO unsure about bool return
             return true;
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         #region UI Button Methods
         // 4.11 Create button click methods that will search the linked list for an integer value entered into a textbox on the form.
@@ -160,7 +147,6 @@ namespace Gaelio_devel
         #endregion
 
         #endregion
-
 
     }
 }
