@@ -35,7 +35,7 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <ListBox x:Name="ListboxB" Margin="223,32,0,0" Grid.Column="2" Width="120" Height="344" HorizontalAlignment="Left" VerticalAlignment="Top" ScrollViewer.HorizontalScrollBarVisibility="Hidden">
+        <ListBox x:Name="ListboxB" Margin="237,32,0,0" Grid.Column="2" Width="120" Height="344" HorizontalAlignment="Left" VerticalAlignment="Top" ScrollViewer.HorizontalScrollBarVisibility="Hidden">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid>
@@ -55,7 +55,9 @@
             <Button x:Name="LoadButton" Content="Load Sensor Data" Margin="9,46,9,0" Click="LoadButton_Click" RenderTransformOrigin="0.555,1.09" Height="28" VerticalAlignment="Top"/>
         </Grid>
         <Label x:Name="labelListboxA" Grid.Column="1" Content="Sensor A" Margin="308,5,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" FontWeight="Bold" HorizontalAlignment="Left" Width="64"/>
-        <Label x:Name="labelListboxB" Grid.Column="2" Content="Sensor B" HorizontalAlignment="Left" Margin="251,5,0,0" VerticalAlignment="Top" Width="64" FontWeight="Bold"/>
+        <Label x:Name="labelListboxB" Grid.Column="2" Content="Sensor B" HorizontalAlignment="Left" Margin="265,5,0,0" VerticalAlignment="Top" Width="64" FontWeight="Bold"/>
+        <Button x:Name="BinarySortIterativeA" Grid.Column="1" Content="Binary Sort Iterative" HorizontalAlignment="Left" Margin="132,131,0,0" VerticalAlignment="Top" Height="23" Width="133" Click="BinarySortIterativeA_Click"/>
+        <Button x:Name="BinarySortIterativeB" Grid.Column="2" Content="Binary Sort Iterative" HorizontalAlignment="Left" Margin="94,131,0,0" VerticalAlignment="Top" Height="23" Width="133" Click="BinarySortIterativeB_Click"/>
 
 
 

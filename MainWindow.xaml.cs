@@ -33,6 +33,8 @@ namespace Gaelio_devel
         {
             linkedListA.Clear();
             linkedListB.Clear();
+            ListboxA.Items.Clear();
+            ListboxB.Items.Clear();
 
 
             // TODO these are placeholders
@@ -47,7 +49,8 @@ namespace Gaelio_devel
                 linkedListA.AddLast(readData.SensorA(sigma, mu));
                 linkedListB.AddLast(readData.SensorB(sigma, mu));
             }
-        }
+/*            MessageBox.Show("New Data Loaded", "Previous data has been overridden.", MessageBoxButton.OK, MessageBoxImage.Information);
+*/        }
         public void ShowAllSensorData()
         {
 
@@ -67,11 +70,6 @@ namespace Gaelio_devel
             LoadData();
             ShowAllSensorData();
             TextBoxTest.Text = NumberOfNodes(linkedListA).ToString();
-            SelectionSort(linkedListA); //TODO move this to dedicated button
-            SelectionSort(linkedListB);
-            DisplayListboxData(linkedListA, ListboxA);
-            DisplayListboxData(linkedListB, ListboxB);
-
         }
         #endregion
         #region Utility Methods
@@ -122,23 +120,29 @@ namespace Gaelio_devel
                         min = j;
                     }
                 }
+
                 LinkedListNode<double> currentMin = linkedlist.Find(linkedlist.ElementAt(min));
                 LinkedListNode<double> currentI = linkedlist.Find(linkedlist.ElementAt(i));
                 
                 double temp = currentMin.Value;
                 currentMin.Value = currentI.Value;
                 currentI.Value = temp;
-
             }
             // TODO unsure about bool return
             return true;
         }
 
+
         #region UI Button Methods
         // 4.11 Create button click methods that will search the linked list for an integer value entered into a textbox on the form.
 
         // 4.11 Method for sensor A/B and binary search iterative 
+        private void BinarySortIterativeA_Click(object sender, RoutedEventArgs e)
+        {
+            SelectionSort(linkedListA); //TODO move this to dedicated button
+            DisplayListboxData(linkedListA, ListboxA);
 
+        }
 
 
         // TODO make a single method for both
@@ -148,5 +152,10 @@ namespace Gaelio_devel
 
         #endregion
 
+        private void BinarySortIterativeB_Click(object sender, RoutedEventArgs e)
+        {
+            SelectionSort(linkedListB); //TODO move this to dedicated button
+            DisplayListboxData(linkedListB, ListboxB);
+        }
     }
 }
