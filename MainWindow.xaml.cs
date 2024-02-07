@@ -172,7 +172,6 @@ namespace Gaelio_devel
             Stopwatch stopwatch = new();
             stopwatch.Start();
 
-
             if (sortType == "SelectionSort")
             {
                 SelectionSort(linkedList);
@@ -180,7 +179,7 @@ namespace Gaelio_devel
             }
             else if (sortType == "InsertionSort" )
             {
-                SelectionSort(linkedList);
+                InsertionSort(linkedList);
                 stopwatch.Stop();
             }
             // add more depending on the sort method
