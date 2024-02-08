@@ -161,28 +161,32 @@ namespace Gaelio_devel
         // 4.11 Method for sensor A/B and binary search iterative
         // 4.11 Method for sensor A/B and binary search recursive
 
+        
+        
+        
+        
+        
         // 4.12	Create button click methods that will sort the LinkedList using the Selection and Insertion methods
-
-        // TODO REFACTOR
+        // I've created a single overloaded method that is called within each button
 
         private void SortMethod(ListBox listbox, LinkedList<double> linkedList, string sortType, TextBox textBox)
         {
-
             listbox.Items.Clear();
             Stopwatch stopwatch = new();
             stopwatch.Start();
 
-            if (sortType == "SelectionSort")
             {
-                SelectionSort(linkedList);
-                stopwatch.Stop();
+                // The SelectionSort(linkedList) bool check is here to ensure the bool is used to stop the time, can not include it in the overload method
+                // as it is ALWAYS true, without a timer delay 
+                if (sortType == "SelectionSort" && SelectionSort(linkedList))
+                {
+                    stopwatch.Stop();
+                }
+                else if (sortType == "InsertionSort" && InsertionSort(linkedList))
+                {
+                    stopwatch.Stop();
+                }
             }
-            else if (sortType == "InsertionSort" )
-            {
-                InsertionSort(linkedList);
-                stopwatch.Stop();
-            }
-            // add more depending on the sort method
             textBox.Text = $"{stopwatch.ElapsedMilliseconds} ms";
             DisplayListboxData(linkedList, listbox);
         }
@@ -194,36 +198,14 @@ namespace Gaelio_devel
         {
             SortMethod(ListboxA, linkedListA, "InsertionSort", InsertionSortATime);
         }
-
         private void SelectionSortBBtn_Click(object sender, RoutedEventArgs e)
         {
-            ListboxB.Items.Clear();
-
-            Stopwatch stopwatch = new();
-            stopwatch.Start();
-
-            if (SelectionSort(linkedListB))
-            {
-                stopwatch.Stop();
-                SelectionSortBTime.Text = $"{stopwatch.ElapsedMilliseconds} ms";
-            }
-            DisplayListboxData(linkedListB, ListboxB);
+            SortMethod(ListboxB, linkedListB, "SelectionSort", SelectionSortBTime);
         }
         private void InsertionSortBBtn_Click(object sender, RoutedEventArgs e)
         {
-            ListboxB.Items.Clear();
-
-            Stopwatch stopwatch = new();
-            stopwatch.Start();
-
-            if (InsertionSort(linkedListB))
-            {
-                stopwatch.Stop();
-                InsertionSortBTime.Text = $"{stopwatch.ElapsedMilliseconds} ms";
-            }
-            DisplayListboxData(linkedListB, ListboxB);
+            SortMethod(ListboxB, linkedListB, "InsertionSort", InsertionSortBTime);
         }
-
         #endregion
 
         private void ResetTimers()
