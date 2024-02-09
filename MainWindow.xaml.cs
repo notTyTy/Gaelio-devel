@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -74,6 +75,7 @@ namespace Gaelio_devel
             ShowAllSensorData();
         }
         #endregion
+
         #region Utility Methods
 
         // 4.5 Create a method called “NumberOfNodes”
@@ -98,13 +100,12 @@ namespace Gaelio_devel
             }
         }
         #endregion
+
         #region Sort and Search Methods
 
         // 4.7 Create a method called SelectionSort which has a single input parameter of type LinkedList,
         // while the calling code argument is linkedlist name. The method code must follow the pseudo code supplied 
         // return type is boolean
-
-
         private bool SelectionSort(LinkedList<double> linkedlist)
         {
             int min;
@@ -137,10 +138,7 @@ namespace Gaelio_devel
         private bool InsertionSort(LinkedList<double> linkedList)
         {
             int max = NumberOfNodes(linkedList);
-            if (!EmptyListCheck())
-            {
-                return EmptyListCheck();
-            }
+
             for (int i = 0; i < max - 1; i++)
             {
                 for (int j = i + 1; j > 0; j--)
@@ -161,17 +159,21 @@ namespace Gaelio_devel
             return true;
         }
 
-
         // 4.9 Create a method called BinarySearchIterative which has the parameters LinkedList, SearchValue, Minimum and Maximum
         // This method will return an integer of the linkedlist element from a successful search or the nearest neighbour value.
         // The calling code argument is the linkedList name, search value, minimum list size and the number of nodes in the list.
         // The method code must follow the pseudo code supplied.
 
-
-        // TODO change order of overload method variables
         private int BinarySearchIterative(LinkedList<double> linkedList, TextBox searchValue, int minimum, int maximum)
         {
+            if (searchValue.Text == "")
+            {
+                MessageBox.Show("Please input a search value!", "Empty Search parameter", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return -1;
+            }
+
             double value = double.Parse(searchValue.Text);
+
 
             while (minimum <= maximum)
             {
@@ -183,7 +185,6 @@ namespace Gaelio_devel
                 else if (value < linkedList.ElementAt(middle))
                 {
                     maximum = middle - 1;
-
                 }
                 else
                 {
@@ -200,11 +201,17 @@ namespace Gaelio_devel
         // The method code must follow the pseudo code supplied
         private int BinarySearchRecursive(LinkedList<double> linkedList, TextBox searchValue, int minimum, int maximum)
         {
-            int value = int.Parse(searchValue.Text);
+            if (searchValue.Text == "")
+            {
+                MessageBox.Show("Please input a search value!", "Empty Search parameter", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return -1;
+            }
+
+            double value = int.Parse(searchValue.Text);
 
             if (minimum <= maximum - 1)
             {
-                int middle = minimum + maximum / 2;
+                int middle = (minimum + maximum) / 2;
                 if (value == linkedList.ElementAt(middle))
                 {
                     return middle;
@@ -216,39 +223,42 @@ namespace Gaelio_devel
                 else
                 {
                     return BinarySearchRecursive(linkedList, searchValue, middle + 1, maximum);
-
                 }
             }
             return minimum;
         }
 
-
         #endregion
 
-        #region UI Button Methods
+
+        // UI Button Methods
         // 4.11 Create button click methods that will search the linked list for an integer value entered
         // into a textbox on the form.
 
-        // 4.11 Method for sensor A/B and binary search iterative
-
-
+        #region 4.11 Method for sensor A/B and binary search iterative
 
         private void IterativeSearchABtn_Click(object sender, RoutedEventArgs e)
         {
-            Stopwatch stopwatch = new();
-            
-            stopwatch.Start();
-            int value = BinarySearchIterative(linkedListA, SearchInputA, 0, NumberOfNodes(linkedListA));
-            stopwatch.Stop();
-
-            IterativeSearchATicks.Text = $"{stopwatch.ElapsedTicks} ticks";
-
-            ListboxA.SelectedIndex = value;
-            if (double.Parse(SearchInputA.Text) < 0 && ListboxA.SelectedIndex != -1)
+            try
             {
-                ListboxA.SelectedIndex--;
-            }
+                Stopwatch stopwatch = new();
 
+                stopwatch.Start();
+                int value = BinarySearchIterative(linkedListA, SearchInputA, 0, NumberOfNodes(linkedListA));
+                stopwatch.Stop();
+
+                IterativeSearchATicks.Text = $"{stopwatch.ElapsedTicks} ticks";
+
+                if (double.Parse(SearchInputA.Text) < 0 && ListboxA.SelectedIndex != -1)
+                {
+                    ListboxA.SelectedIndex--;
+                }
+            }
+            catch (Exception exception)
+            {
+                // todo exception handling
+                IterativeSearchATicks.Text = "0 ticks";
+            }
             ListboxA.ScrollIntoView(ListboxA.SelectedItem);
         }
 
@@ -270,24 +280,52 @@ namespace Gaelio_devel
 
             ListboxB.ScrollIntoView(ListboxB.SelectedItem);
         }
+        #endregion
 
-        // 4.11 Method for sensor A/B and binary search recursive
+        #region 4.11 Method for sensor A/B and binary search recursive
         private void RecursiveSearchABtn_Click(object sender, RoutedEventArgs e)
         {
+            Stopwatch stopwatch = new();
+
+            stopwatch.Start();
             int value = BinarySearchRecursive(linkedListA, SearchInputA, 0, NumberOfNodes(linkedListA));
+            stopwatch.Stop();
+
+            RecursiveSearchATicks.Text = $"{stopwatch.ElapsedTicks} ticks";
+
             ListboxA.SelectedIndex = value;
+
+            if (double.Parse(SearchInputA.Text) < 0 && ListboxA.SelectedIndex != -1)
+            {
+                ListboxA.SelectedIndex--;
+            }
+            ListboxA.ScrollIntoView(ListboxA.SelectedItem);
         }
 
         private void RecursiveSearchBBtn_Click(object sender, RoutedEventArgs e)
         {
+            Stopwatch stopwatch = new();
+
+            stopwatch.Start();
             int value = BinarySearchRecursive(linkedListB, SearchInputB, 0, NumberOfNodes(linkedListB));
+            stopwatch.Stop();
+
+            RecursiveSearchBTicks.Text = $"{stopwatch.ElapsedTicks} ticks";
+
             ListboxB.SelectedIndex = value;
+
+            if (double.Parse(SearchInputB.Text) < 0 && ListboxB.SelectedIndex != -1)
+            {
+                ListboxB.SelectedIndex--;
+            }
+            ListboxB.ScrollIntoView(ListboxB.SelectedItem);
         }
+        #endregion
 
 
-        // 4.12	Create button click methods that will sort the LinkedList using the Selection and Insertion methods
-        // I've created a single overloaded method that is called within each button
+        #region 4.12 Create button click methods that will sort the LinkedList using the Selection and Insertion methods
 
+        #region  Custom SortMethod for ensuring modularity
         private void SortMethod(ListBox listbox, LinkedList<double> linkedList, string sortType, TextBox textBox)
         {
             listbox.Items.Clear();
@@ -308,6 +346,8 @@ namespace Gaelio_devel
             textBox.Text = $"{stopwatch.ElapsedMilliseconds} ms";
             DisplayListboxData(linkedList, listbox);
         }
+        #endregion
+        #region Sort Button Click Methods
         private void SelectionSortABtn_Click(object sender, RoutedEventArgs e)
         {
             SortMethod(ListboxA, linkedListA, "SelectionSort", SelectionSortATime);
@@ -326,11 +366,14 @@ namespace Gaelio_devel
         }
         #endregion
 
+        #endregion
+
+        #region Quality of Life features, makes the application more intuitive and friendly
         private void ResetTimers()
         {
             List<TextBox> timeMs = [SelectionSortATime, SelectionSortBTime, InsertionSortATime, InsertionSortBTime];
             List<TextBox> timeTicks = [IterativeSearchATicks, IterativeSearchBTicks, RecursiveSearchATicks, RecursiveSearchBTicks];
-           
+
             foreach (TextBox textBox in timeMs)
             {
                 textBox.Text = "0 ms";
@@ -344,8 +387,6 @@ namespace Gaelio_devel
         }
 
         //todo  Check has been added to ensure that the user understands to load data before continuing
-
-        
         private bool EmptyListCheck()
         {
             if (LinkedListView.Items.Count == 0)
@@ -355,5 +396,6 @@ namespace Gaelio_devel
             }
             return true;
         }
+        #endregion
     }
 }
