@@ -23,7 +23,7 @@
             </ListView.View>
         </ListView>
         <TextBox x:Name="SelectionSortATime" HorizontalAlignment="Left" Margin="139,78,0,0" TextWrapping="Wrap" Text="0 ms" VerticalAlignment="Top" Width="120" Height="18" Grid.Column="1"/>
-        <TextBox x:Name="SelectionSortBTime" HorizontalAlignment="Left" Margin="112,69,0,0" TextWrapping="Wrap" Text="0 ms" VerticalAlignment="Top" Width="120" Height="18" Grid.Column="2"/>
+        <TextBox x:Name="SelectionSortBTime" HorizontalAlignment="Left" Margin="99,78,0,0" TextWrapping="Wrap" Text="0 ms" VerticalAlignment="Top" Width="120" Height="18" Grid.Column="2"/>
         <ListBox x:Name="ListboxA" Margin="280,32,0,0" Grid.Column="1" Height="344" VerticalAlignment="Top" Grid.ColumnSpan="2" HorizontalAlignment="Left" Width="120" ScrollViewer.HorizontalScrollBarVisibility="Hidden">
             <ListBox.ItemTemplate>
                 <DataTemplate>
@@ -58,11 +58,21 @@
         <Label x:Name="labelListboxA" Grid.Column="1" Content="Sensor A" Margin="308,5,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" FontWeight="Bold" HorizontalAlignment="Left" Width="64"/>
         <Label x:Name="labelListboxB" Grid.Column="2" Content="Sensor B" HorizontalAlignment="Left" Margin="265,5,0,0" VerticalAlignment="Top" Width="64" FontWeight="Bold"/>
         <Button x:Name="SelectionSortABtn" Grid.Column="1" Content="Selection Sort" HorizontalAlignment="Left" Margin="132,50,0,0" VerticalAlignment="Top" Height="23" Width="133" Click="SelectionSortABtn_Click"/>
-        <Button x:Name="InsertionSortABtn" Grid.Column="1" Content="Insertion Sort" HorizontalAlignment="Left" Margin="132,143,0,0" VerticalAlignment="Top" Height="23" Width="133" Click="InsertionSortABtn_Click"/>
-        <Button x:Name="SelectionSortBBtn" Grid.Column="2" Content="Selection Sort" HorizontalAlignment="Left" Margin="99,131,0,0" VerticalAlignment="Top" Height="23" Width="133" Click="SelectionSortBBtn_Click"/>
-        <Button x:Name="InsertionSortBBtn" Grid.Column="2" Content="Insertion Sort" HorizontalAlignment="Left" Margin="99,170,0,0" VerticalAlignment="Top" Height="23" Width="133" Click="InsertionSortBBtn_Click"/>
-        <TextBox x:Name="InsertionSortATime" HorizontalAlignment="Left" Margin="139,204,0,0" TextWrapping="Wrap" Text="0 ms" VerticalAlignment="Top" Width="120" Height="18" Grid.Column="1"/>
-        <TextBox x:Name="InsertionSortBTime" HorizontalAlignment="Left" Margin="112,213,0,0" TextWrapping="Wrap" Text="0 ms" VerticalAlignment="Top" Width="120" Height="18" Grid.Column="2"/>
+        <Button x:Name="InsertionSortABtn" Grid.Column="1" Content="Insertion Sort" HorizontalAlignment="Left" Margin="132,112,0,0" VerticalAlignment="Top" Height="23" Width="133" Click="InsertionSortABtn_Click"/>
+        <Button x:Name="SelectionSortBBtn" Grid.Column="2" Content="Selection Sort" HorizontalAlignment="Left" Margin="93,50,0,0" VerticalAlignment="Top" Height="23" Width="132" Click="SelectionSortBBtn_Click"/>
+        <Button x:Name="InsertionSortBBtn" Grid.Column="2" Content="Insertion Sort" HorizontalAlignment="Left" Margin="93,112,0,0" VerticalAlignment="Top" Height="23" Width="133" Click="InsertionSortBBtn_Click"/>
+        <TextBox x:Name="InsertionSortATime" HorizontalAlignment="Left" Margin="139,140,0,0" TextWrapping="Wrap" Text="0 ms" VerticalAlignment="Top" Width="120" Height="18" Grid.Column="1"/>
+        <TextBox x:Name="InsertionSortBTime" HorizontalAlignment="Left" Margin="99,140,0,0" TextWrapping="Wrap" Text="0 ms" VerticalAlignment="Top" Width="120" Height="18" Grid.Column="2"/>
+        <TextBox x:Name="IterativeSearchATicks" HorizontalAlignment="Left" Margin="139,260,0,0" TextWrapping="Wrap" Text="0 ticks" VerticalAlignment="Top" Width="120" Height="18" Grid.Column="1"/>
+        <Button x:Name="IterativeSearchABtn" Grid.Column="1" Content="Binary Search Interative" HorizontalAlignment="Left" Margin="131,232,0,0" VerticalAlignment="Top" Height="23" Width="134" Click="IterativeSearchABtn_Click"/>
+        <Button x:Name="RecursiveSearchABtn" Grid.Column="1" Content="Binary Search Recursive" HorizontalAlignment="Left" Margin="131,294,0,0" VerticalAlignment="Top" Height="23" Width="134" Click="RecursiveSearchABtn_Click"/>
+        <TextBox x:Name="RecursiveSearchATicks" HorizontalAlignment="Left" Margin="139,322,0,0" TextWrapping="Wrap" Text="0 ticks" VerticalAlignment="Top" Width="120" Height="18" Grid.Column="1"/>
+        <TextBox x:Name="IterativeSearchBTicks" HorizontalAlignment="Left" Margin="99,260,0,0" TextWrapping="Wrap" Text="0 ticks" VerticalAlignment="Top" Width="120" Height="18" Grid.Column="2"/>
+        <Button x:Name="IterativeSearchBBtn" Grid.Column="2" Content="Binary Search Interative" HorizontalAlignment="Left" Margin="92,232,0,0" VerticalAlignment="Top" Height="23" Width="133" Click="IterativeSearchBBtn_Click"/>
+        <Button x:Name="RecursiveSearchBBtn" Grid.Column="2" Content="Binary Search Recursive" HorizontalAlignment="Left" Margin="92,294,0,0" VerticalAlignment="Top" Height="23" Width="133" Click="RecursiveSearchBBtn_Click"/>
+        <TextBox x:Name="RecursiveSearchBTicks" HorizontalAlignment="Left" Margin="99,322,0,0" TextWrapping="Wrap" Text="0 ticks" VerticalAlignment="Top" Width="120" Height="18" Grid.Column="2"/>
+        <TextBox x:Name="SearchInputA" Grid.Column="1" HorizontalAlignment="Left" Margin="139,204,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="SearchInputB" Grid.Column="2" HorizontalAlignment="Left" Margin="99,204,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
 
 
 

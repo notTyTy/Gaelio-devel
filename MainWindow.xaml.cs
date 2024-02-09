@@ -129,6 +129,9 @@ namespace Gaelio_devel
             return true;
         }
 
+        // Create a method called InsertionSort which has a single input parameter of type LinkedList, while
+        // the calling code argument is the linkedList name. The method code must follow the pseudo code supplied.
+        // return type is boolean
         private bool InsertionSort(LinkedList<double> linkedList)
         {
             int max = NumberOfNodes(linkedList);
@@ -145,27 +148,124 @@ namespace Gaelio_devel
                         currentLess.Value = current.Value;
                         current.Value = temp;
 
-                        //TODO INSERTION SWAP
-                        // add swap code here by swapping previous value with current value
 
                     }
                 }
             }
             return true;
         }
+
+        // 4.9 Create a method called BinarySearchIterative which has the parameters LinkedList, SearchValue, Minimum and Maximum
+        // This method will return an integer of the linkedlist element from a successful search or the nearest neighbour value.
+        // The calling code argument is the linkedList name, search value, minimum list size and the number of nodes in the list.
+        // The method code must follow the pseudo code supplied.
+
+
+        // TODO change order of overload method variables
+        private int BinarySearchIterative(LinkedList<double> linkedList, TextBox searchValue, int minimum, int maximum)
+        {
+            // todo
+            double value = double.Parse(searchValue.Text);
+
+            while (minimum <= maximum)
+            {
+                int middle = (minimum + maximum) / 2;
+                if (value == linkedList.ElementAt(middle))
+                {
+                    return ++middle;
+                }
+                else if (value < linkedList.ElementAt(middle))
+                {
+                    maximum = middle - 1;
+
+                }
+                else
+                {
+                    minimum = middle + 1;
+                }
+            }
+            return minimum;
+        }
+
+        // 4.9 Create a method called BinarySearchIterative which has the following four parameters
+        // LinkedList, SearchValue, Minimum and Maximum. This method will return an integer of the list
+        // element from a successful search of the nearest neighbour value. The calling code is the 
+        // linked list name, search value, minimum list size and the number of nodes in the list.
+        // The method code must follow the pseudo code supplied
+        private int BinarySearchRecursive(LinkedList<double> linkedList, TextBox searchValue, int minimum, int maximum)
+        {
+            int value = int.Parse(searchValue.Text);
+
+            if (minimum <= maximum - 1)
+            {
+                int middle = minimum + maximum / 2;
+                if (value == linkedList.ElementAt(middle))
+                {
+                    return middle;
+                }
+                else if (value < linkedList.ElementAt(middle))
+                {
+                    return BinarySearchRecursive(linkedList, searchValue, minimum, middle - 1);
+                }
+                else
+                {
+                    return BinarySearchRecursive(linkedList, searchValue, middle + 1, maximum);
+
+                }
+            }
+            return minimum;
+        }
+
+
         #endregion
 
         #region UI Button Methods
-        // 4.11 Create button click methods that will search the linked list for an integer value entered into a textbox on the form.
+        // 4.11 Create button click methods that will search the linked list for an integer value entered
+        // into a textbox on the form.
 
         // 4.11 Method for sensor A/B and binary search iterative
-        // 4.11 Method for sensor A/B and binary search recursive
+        private void IterativeSearchABtn_Click(object sender, RoutedEventArgs e)
+        {
+            Stopwatch stopwatch = new();
+            
+            stopwatch.Start();
+            int value = BinarySearchIterative(linkedListA, SearchInputA, 0, linkedListA.Count());
+            stopwatch.Stop();
 
-        
-        
-        
-        
-        
+            IterativeSearchATicks.Text = $"{stopwatch.ElapsedTicks} ticks";
+
+            ListboxA.SelectedIndex = value;
+            if (double.Parse(SearchInputA.Text) < 0)
+            {
+                ListboxA.SelectedIndex--;
+            }
+
+            ListboxA.ScrollIntoView(ListboxA.SelectedItem);
+        }
+
+        private void IterativeSearchBBtn_Click(object sender, RoutedEventArgs e)
+        {
+            int value = BinarySearchIterative(linkedListB, SearchInputB, 0, NumberOfNodes(linkedListB));
+            ListboxB.SelectedIndex = value;
+        }
+
+        // 4.11 Method for sensor A/B and binary search recursive
+        private void RecursiveSearchABtn_Click(object sender, RoutedEventArgs e)
+        {
+            int value = BinarySearchRecursive(linkedListA, SearchInputA, 0, NumberOfNodes(linkedListA));
+            ListboxA.SelectedIndex = value;
+        }
+
+        private void RecursiveSearchBBtn_Click(object sender, RoutedEventArgs e)
+        {
+            int value = BinarySearchRecursive(linkedListB, SearchInputB, 0, NumberOfNodes(linkedListB));
+            ListboxB.SelectedIndex = value;
+        }
+
+
+
+
+
         // 4.12	Create button click methods that will sort the LinkedList using the Selection and Insertion methods
         // I've created a single overloaded method that is called within each button
 
@@ -174,7 +274,6 @@ namespace Gaelio_devel
             listbox.Items.Clear();
             Stopwatch stopwatch = new();
             stopwatch.Start();
-
             {
                 // The SelectionSort(linkedList) bool check is here to ensure the bool is used to stop the time, can not include it in the overload method
                 // as it is ALWAYS true, without a timer delay 
@@ -216,5 +315,7 @@ namespace Gaelio_devel
                 textBox.Text = "0 ms";
             }
         }
+
+
     }
 }
