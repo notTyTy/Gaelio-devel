@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.IO;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -50,13 +51,12 @@ namespace Gaelio_devel
             // 4.2 The LinkedList size will be hardcoded inside the method and must be equal to 400. 
             for (int i = 0; i < 400; i++)
             {
-                linkedListA.AddLast(readData.SensorA(sigma, mu));
-                linkedListB.AddLast(readData.SensorB(sigma, mu));
+                linkedListA.AddLast(readData.SensorA(mu, sigma));
+                linkedListB.AddLast(readData.SensorB(mu, sigma));
             }
         }
         public void ShowAllSensorData()
         {
-
             LinkedListView.Items.Clear();
             for (int i = 0; i < (linkedListA.Count | linkedListB.Count); i++)
             {
@@ -151,8 +151,6 @@ namespace Gaelio_devel
                         double temp = currentLess.Value;
                         currentLess.Value = current.Value;
                         current.Value = temp;
-
-
                     }
                 }
             }
@@ -173,7 +171,6 @@ namespace Gaelio_devel
             }
 
             double value = double.Parse(searchValue.Text);
-
 
             while (minimum <= maximum)
             {
@@ -239,31 +236,26 @@ namespace Gaelio_devel
 
         private void IterativeSearchABtn_Click(object sender, RoutedEventArgs e)
         {
-            try
+            if (ShouldSkipSearch(SearchInputA, ListboxA))
             {
-                Stopwatch stopwatch = new();
-
-                stopwatch.Start();
-                int value = BinarySearchIterative(linkedListA, SearchInputA, 0, NumberOfNodes(linkedListA));
-                stopwatch.Stop();
-
-                IterativeSearchATicks.Text = $"{stopwatch.ElapsedTicks} ticks";
-
-                if (double.Parse(SearchInputA.Text) < 0 && ListboxA.SelectedIndex != -1)
-                {
-                    ListboxA.SelectedIndex--;
-                }
+                return;
             }
-            catch (Exception exception)
-            {
-                // todo exception handling
-                IterativeSearchATicks.Text = "0 ticks";
-            }
+            Stopwatch stopwatch = new();
+            stopwatch.Start();
+            int value = BinarySearchIterative(linkedListA, SearchInputA, 0, NumberOfNodes(linkedListA));
+            stopwatch.Stop();
+
+            IterativeSearchATicks.Text = $"{stopwatch.ElapsedTicks} ticks";
+            ListboxA.SelectedIndex = value;
             ListboxA.ScrollIntoView(ListboxA.SelectedItem);
         }
 
         private void IterativeSearchBBtn_Click(object sender, RoutedEventArgs e)
         {
+            if (ShouldSkipSearch(SearchInputB, ListboxB))
+            {
+                return;
+            }    
             Stopwatch stopwatch = new();
 
             stopwatch.Start();
@@ -271,13 +263,7 @@ namespace Gaelio_devel
             stopwatch.Stop();
 
             IterativeSearchBTicks.Text = $"{stopwatch.ElapsedTicks} ticks";
-
             ListboxB.SelectedIndex = value;
-            if (double.Parse(SearchInputB.Text) < 0 && ListboxB.SelectedIndex != -1)
-            {
-                ListboxB.SelectedIndex--;
-            }
-
             ListboxB.ScrollIntoView(ListboxB.SelectedItem);
         }
         #endregion
@@ -285,6 +271,10 @@ namespace Gaelio_devel
         #region 4.11 Method for sensor A/B and binary search recursive
         private void RecursiveSearchABtn_Click(object sender, RoutedEventArgs e)
         {
+            if (ShouldSkipSearch(SearchInputA, ListboxA))
+            {
+                return;
+            }
             Stopwatch stopwatch = new();
 
             stopwatch.Start();
@@ -292,18 +282,16 @@ namespace Gaelio_devel
             stopwatch.Stop();
 
             RecursiveSearchATicks.Text = $"{stopwatch.ElapsedTicks} ticks";
-
             ListboxA.SelectedIndex = value;
-
-            if (double.Parse(SearchInputA.Text) < 0 && ListboxA.SelectedIndex != -1)
-            {
-                ListboxA.SelectedIndex--;
-            }
             ListboxA.ScrollIntoView(ListboxA.SelectedItem);
         }
 
         private void RecursiveSearchBBtn_Click(object sender, RoutedEventArgs e)
         {
+            if (ShouldSkipSearch(SearchInputB, ListboxB))
+            {
+                return;
+            }
             Stopwatch stopwatch = new();
 
             stopwatch.Start();
@@ -311,58 +299,77 @@ namespace Gaelio_devel
             stopwatch.Stop();
 
             RecursiveSearchBTicks.Text = $"{stopwatch.ElapsedTicks} ticks";
-
             ListboxB.SelectedIndex = value;
-
-            if (double.Parse(SearchInputB.Text) < 0 && ListboxB.SelectedIndex != -1)
-            {
-                ListboxB.SelectedIndex--;
-            }
             ListboxB.ScrollIntoView(ListboxB.SelectedItem);
         }
         #endregion
 
-
         #region 4.12 Create button click methods that will sort the LinkedList using the Selection and Insertion methods
 
-        #region  Custom SortMethod for ensuring modularity
-        private void SortMethod(ListBox listbox, LinkedList<double> linkedList, string sortType, TextBox textBox)
-        {
-            listbox.Items.Clear();
-            Stopwatch stopwatch = new();
-            stopwatch.Start();
-            {
-                // The SelectionSort(linkedList) bool check is here to ensure the bool is used to stop the time, can not include it in the overload method
-                // as it is ALWAYS true, without a timer delay 
-                if (sortType == "SelectionSort" && SelectionSort(linkedList))
-                {
-                    stopwatch.Stop();
-                }
-                else if (sortType == "InsertionSort" && InsertionSort(linkedList))
-                {
-                    stopwatch.Stop();
-                }
-            }
-            textBox.Text = $"{stopwatch.ElapsedMilliseconds} ms";
-            DisplayListboxData(linkedList, listbox);
-        }
-        #endregion
         #region Sort Button Click Methods
         private void SelectionSortABtn_Click(object sender, RoutedEventArgs e)
         {
-            SortMethod(ListboxA, linkedListA, "SelectionSort", SelectionSortATime);
+            if (NumberOfNodes(linkedListA) <= 0)
+            {
+                MessageBox.Show("Please ensure data is loaded before interacting!", "Empty Listview", MessageBoxButton.OK, MessageBoxImage.Hand);
+                return;
+            }
+            ListboxA.Items.Clear();
+            Stopwatch stopwatch = new();
+            stopwatch.Start();
+            SelectionSort(linkedListA);
+            stopwatch.Stop();
+
+            DisplayListboxData(linkedListA, ListboxA);
+            SelectionSortATime.Text = $"{stopwatch.ElapsedMilliseconds} ms";
         }
         private void InsertionSortABtn_Click(object sender, RoutedEventArgs e)
         {
-            SortMethod(ListboxA, linkedListA, "InsertionSort", InsertionSortATime);
+            if (NumberOfNodes(linkedListA) <= 0)
+            {
+                MessageBox.Show("Please ensure data is loaded before interacting!", "Empty Listview", MessageBoxButton.OK, MessageBoxImage.Hand);
+                return;
+            }
+            ListboxA.Items.Clear();
+            Stopwatch stopwatch = new();
+            stopwatch.Start();
+            InsertionSort(linkedListA);
+            stopwatch.Stop();
+
+            DisplayListboxData(linkedListA, ListboxA);
+            InsertionSortATime.Text = $"{stopwatch.ElapsedMilliseconds} ms";
         }
         private void SelectionSortBBtn_Click(object sender, RoutedEventArgs e)
         {
-            SortMethod(ListboxB, linkedListB, "SelectionSort", SelectionSortBTime);
+            if (NumberOfNodes(linkedListA) <= 0)
+            {
+                MessageBox.Show("Please ensure data is loaded before interacting!", "Empty Listview", MessageBoxButton.OK, MessageBoxImage.Hand);
+                return;
+            }
+            ListboxB.Items.Clear();
+            Stopwatch stopwatch = new();
+            stopwatch.Start();
+            SelectionSort(linkedListB);
+            stopwatch.Stop();
+
+            DisplayListboxData(linkedListB, ListboxB);
+            SelectionSortBTime.Text = $"{stopwatch.ElapsedMilliseconds} ms";
         }
         private void InsertionSortBBtn_Click(object sender, RoutedEventArgs e)
         {
-            SortMethod(ListboxB, linkedListB, "InsertionSort", InsertionSortBTime);
+            if (NumberOfNodes(linkedListB) <= 0)
+            {
+                MessageBox.Show("Please ensure data is loaded before interacting!", "Empty Listview", MessageBoxButton.OK, MessageBoxImage.Hand);
+                return;
+            }
+            ListboxB.Items.Clear();
+            Stopwatch stopwatch = new();
+            stopwatch.Start();
+            InsertionSort(linkedListB);
+            stopwatch.Stop();
+
+            DisplayListboxData(linkedListB, ListboxB);
+            InsertionSortBTime.Text = $"{stopwatch.ElapsedMilliseconds} ms";
         }
         #endregion
 
@@ -389,6 +396,7 @@ namespace Gaelio_devel
         //todo  Check has been added to ensure that the user understands to load data before continuing
         private bool EmptyListCheck()
         {
+            // todo workies
             if (LinkedListView.Items.Count == 0)
             {
                 MessageBox.Show("Please load some data!", "No data error", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -396,6 +404,34 @@ namespace Gaelio_devel
             }
             return true;
         }
+
+        private bool ShouldSkipSearch(TextBox textbox, ListBox listBox)
+        {
+            if (LinkedListView.Items.Count <= 0)
+            {
+                LoadData();
+                ShowAllSensorData();
+            }
+            if (textbox.Text == "")
+            {
+                MessageBox.Show("Please input a value before searching!", "Empty search field", MessageBoxButton.OK, MessageBoxImage.Error);
+                return true;
+            }
+            if (listBox.Items.Count <= 0)
+            {
+                MessageBox.Show("Please sort some data before attempting to search!", "Unsorted Data", MessageBoxButton.OK, MessageBoxImage.Error);
+                return true;
+            }
+            return false;
+        }
+
+        // 4.14 Add textboxes for the search value. One for each sensor, ensure only numeric integer values can be entered
+        private void SearchInput_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !Regex.IsMatch(e.Text, "^[0-9]*$");
+        }
+
         #endregion
+
     }
 }

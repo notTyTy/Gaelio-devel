@@ -72,8 +72,8 @@
         <Button x:Name="IterativeSearchBBtn" Grid.Column="2" Content="Binary Search Interative" HorizontalAlignment="Left" Margin="92,232,0,0" VerticalAlignment="Top" Height="23" Width="133" Click="IterativeSearchBBtn_Click"/>
         <Button x:Name="RecursiveSearchBBtn" Grid.Column="2" Content="Binary Search Recursive" HorizontalAlignment="Left" Margin="92,294,0,0" VerticalAlignment="Top" Height="23" Width="133" Click="RecursiveSearchBBtn_Click"/>
         <TextBox x:Name="RecursiveSearchBTicks" HorizontalAlignment="Left" Margin="99,322,0,0" TextWrapping="Wrap" Text="0 ticks" VerticalAlignment="Top" Width="120" Height="18" Grid.Column="2" IsReadOnly="True"/>
-        <TextBox x:Name="SearchInputA" Grid.Column="1" HorizontalAlignment="Left" Margin="139,204,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" />
-        <TextBox x:Name="SearchInputB" Grid.Column="2" HorizontalAlignment="Left" Margin="99,204,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" />
+        <TextBox x:Name="SearchInputA" Grid.Column="1" HorizontalAlignment="Left" Margin="139,204,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" PreviewTextInput="SearchInput_PreviewTextInput" />
+        <TextBox x:Name="SearchInputB" Grid.Column="2" HorizontalAlignment="Left" Margin="99,204,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" PreviewTextInput="SearchInput_PreviewTextInput" />
         <Label x:Name="SearchLabelA" Grid.Column="1" Content="Search Sensor A" HorizontalAlignment="Left" Margin="149,178,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
         <Label x:Name="SearchLabelB" Grid.Column="2" Content="Search Sensor B" HorizontalAlignment="Left" Margin="109,178,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
 
