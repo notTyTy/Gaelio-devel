@@ -170,7 +170,7 @@ namespace Gaelio_devel
                 return -1;
             }
 
-            double value = double.Parse(searchValue.Text);
+            int value = int.Parse(searchValue.Text);
 
             while (minimum <= maximum)
             {
@@ -204,7 +204,7 @@ namespace Gaelio_devel
                 return -1;
             }
 
-            double value = int.Parse(searchValue.Text);
+            int value = int.Parse(searchValue.Text);
 
             if (minimum <= maximum - 1)
             {
@@ -229,9 +229,12 @@ namespace Gaelio_devel
 
 
         // UI Button Methods
-        // 4.11 Create button click methods that will search the linked list for an integer value entered
-        // into a textbox on the form.
 
+        // 4.14 Add textboxes for the search value. One for each sensor, ensure only numeric integer values can be entered
+        private void SearchInput_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !Regex.IsMatch(e.Text, "^[0-9]*$");
+        }
         #region 4.11 Method for sensor A/B and binary search iterative
 
         private void IterativeSearchABtn_Click(object sender, RoutedEventArgs e)
@@ -393,10 +396,8 @@ namespace Gaelio_devel
             SearchInputB.Text = "";
         }
 
-        //todo  Check has been added to ensure that the user understands to load data before continuing
         private bool EmptyListCheck()
         {
-            // todo workies
             if (LinkedListView.Items.Count == 0)
             {
                 MessageBox.Show("Please load some data!", "No data error", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -425,11 +426,6 @@ namespace Gaelio_devel
             return false;
         }
 
-        // 4.14 Add textboxes for the search value. One for each sensor, ensure only numeric integer values can be entered
-        private void SearchInput_PreviewTextInput(object sender, TextCompositionEventArgs e)
-        {
-            e.Handled = !Regex.IsMatch(e.Text, "^[0-9]*$");
-        }
 
         #endregion
 
