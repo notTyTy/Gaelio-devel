@@ -75,17 +75,17 @@ namespace Gaelio_devel
             return listSize.Count();
         }
 
-
         // 4.6 Create a method called "DisplayListboxData" that will display
         // the content of a linkedlist inside the appropriate listbox.
         private void DisplayListboxData(LinkedList<double> linkedList, ListBox listboxName)
         {
             listboxName.Items.Clear();
-            for (int i = 0; i < linkedList.Count(); i++)
+
+            foreach (double value in linkedList)
             {
                 listboxName.Items.Add(new
                 {
-                    GetSensorData = linkedList.ElementAt(i)
+                    GetSensorData = value
                 });
             }
         }
@@ -248,7 +248,7 @@ namespace Gaelio_devel
             if (ShouldSkipSearch(SearchInputB, ListboxB))
             {
                 return;
-            }    
+            }
             Stopwatch stopwatch = new();
 
             stopwatch.Start();
