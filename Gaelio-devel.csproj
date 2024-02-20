@@ -10,8 +10,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Page Remove="a.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Dirkster.NumericUpDownLibEx" Version="3.4.0.1" />
     <PackageReference Include="MaterialDesignThemes" Version="4.9.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Include="App.xaml" />
   </ItemGroup>
 
   <ItemGroup>

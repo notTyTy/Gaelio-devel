@@ -34,15 +34,13 @@ namespace Gaelio_devel
 
         #region Global Methods
         // 4.2 Create a method called “LoadData” which will populate both LinkedLists. The return type is void.
-        public void LoadData()
+        private void LoadData()
         {
             linkedListA.Clear();
             linkedListB.Clear();
             ListboxA.Items.Clear(); // Clears the previous sorted data from listboxes
             ListboxB.Items.Clear();
 
-
-            // TODO these are placeholders
             double sigma = SigmaUpDown.Value;
             double mu = MuUpDown.Value;
             ReadData readData = new();
@@ -55,7 +53,7 @@ namespace Gaelio_devel
                 linkedListB.AddLast(readData.SensorB(mu, sigma));
             }
         }
-        public void ShowAllSensorData()
+        private void ShowAllSensorData()
         {
             LinkedListView.Items.Clear();
             for (int i = 0; i < (linkedListA.Count | linkedListB.Count); i++)
@@ -206,7 +204,7 @@ namespace Gaelio_devel
 
             int value = int.Parse(searchValue.Text);
 
-            if (minimum <= maximum - 1)
+            if (minimum <= maximum)
             {
                 int middle = (minimum + maximum) / 2;
                 if (value == linkedList.ElementAt(middle))
@@ -425,8 +423,6 @@ namespace Gaelio_devel
             }
             return false;
         }
-
-
         #endregion
 
     }
